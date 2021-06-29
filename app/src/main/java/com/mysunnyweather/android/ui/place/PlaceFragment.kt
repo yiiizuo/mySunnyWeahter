@@ -1,6 +1,8 @@
 package com.mysunnyweather.android.ui.place
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +15,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mysunnyweather.android.MainActivity
 import com.mysunnyweather.android.R
+import com.mysunnyweather.android.ui.weather.WeatherActivity
 import kotlinx.android.synthetic.main.fragment_place.*
 
 class PlaceFragment:Fragment() {
@@ -31,6 +35,18 @@ class PlaceFragment:Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        if(activity is MainActivity && viewModel.isPlaceSaved()){
+            val place= viewModel.getSavedPlace()
+            val intent=Intent(context,WeatherActivity::class.java).apply {
+                putExtra("location_lng",place.location.lng)
+                putExtra("location_lat",place.location.lat)
+                putExtra("place_name",place.name)
+            }
+            startActivity(intent)
+            activity?.finish()
+            return
+        }
+
         val layoutManager=LinearLayoutManager(activity)
         recyclerView.layoutManager=layoutManager
         adapter= PlaceAdapter(this,viewModel.placeList)
@@ -48,6 +64,7 @@ class PlaceFragment:Fragment() {
         }
         viewModel.placeLiveData.observe(this, Observer { result->
             val places=result.getOrNull()
+//            Log.d("main","$result")
             if(places != null){
                 recyclerView.visibility=View.VISIBLE
                 bgImageView.visibility=View.GONE
@@ -55,6 +72,7 @@ class PlaceFragment:Fragment() {
                 viewModel.placeList.addAll(places)
                 adapter.notifyDataSetChanged()
             }else{
+//                Log.d("main","$viewModel")
                 Toast.makeText(activity,"未能查询到任何地点",Toast.LENGTH_SHORT).show()
                 result.exceptionOrNull()?.printStackTrace()
             }

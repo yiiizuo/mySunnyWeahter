@@ -6,7 +6,9 @@ import android.content.Context
 
 class SunnyWeaherApplication:Application(){
     companion object{
-        const val TOKEN="请输入你的申请的令牌值"
+
+        const val TOKEN="eFWnvc0yOErqVFRD"
+
         @SuppressLint("StaticFieldLeak")
         lateinit var context: Context
     }
