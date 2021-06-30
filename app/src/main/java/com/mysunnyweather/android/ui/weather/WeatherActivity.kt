@@ -38,31 +38,7 @@ class WeatherActivity : AppCompatActivity() {
             decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
             window.statusBarColor = Color.TRANSPARENT
         }
-//        val controller = ViewCompat.getWindowInsetsController(decorView)
-//        controller?.hide(WindowInsetsCompat.Type.statusBars())
-//        controller?.hide(WindowInsetsCompat.Type.navigationBars())
-//        controller?.hide(WindowInsetsCompat.Type.systemBars())
-//        window.setNavigationBarColor(ContextCompat.getColor(this, R.color.colorPrimary))
-//        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-//        window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorPrimary));
 
-//        window.insetsController?.also {
-//            it.hide(WindowInsets.Type.statusBars())
-//            it.hide(WindowInsets.Type.navigationBars())
-//        }
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-//            window.insetsController?.hide(WindowInsets.Type.statusBars())
-//        }
-//        else {
-//            @Suppress("DEPRECATION")
-//            window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-//                    WindowManager.LayoutParams.FLAG_FULLSCREEN)
-//        }
-
-//        window.insetsController?.setSystemBarsAppearance(
-//                0,
-//                WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
-//        )
 
         setContentView(R.layout.activity_weather)
 
